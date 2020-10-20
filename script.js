@@ -1,7 +1,6 @@
 // http://api.openweathermap.org/data/2.5/weather?q=boston&appid=82cd4c13edf633371f0dc74a457a8087
 
-
-
+//document.ready is telling the server to load html first then css then js
 $(document).ready(function () {
     // This is our API key. Add your own API key between the ""
     // var APIKey = "82cd4c13edf633371f0dc74a457a8087";
@@ -12,34 +11,38 @@ $(document).ready(function () {
     // var queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
 
 
-    // adding click event
+    // adding click event for the search button
     $("#searchBtn").on("click", function (event) {
-        // this function prevents page from being refreshed on click, allowing data to be shown
+
+        // event.preventDefault(); prevents the page from  refreashing when the search button is clicked and it instead actually submits the data from the search button to run through the weather server
         event.preventDefault();
         var city = $("#city-input").val();
         console.log(city);
+
+        // adding local apikey and queryURL variables to be used in ajax call
         var APIKey = "82cd4c13edf633371f0dc74a457a8087";
         var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
 
-        // We then created an AJAX call
+        // creating the ajax call that will run the function
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-            // Create CODE HERE to Log the queryURL
+            // console logging the code to log the queryURL
             console.log(queryURL);
-            // Create CODE HERE to log the resulting object
+            // console logging code to log the response function
             console.log(response);
-            // Create CODE HERE to calculate the temperature (converted from Kelvin)
+            // console logging code to show temperature 
             console.log(response.main.temp);
 
-            // Create CODE HERE to transfer content to HTML
+            // this code will transfer the contents to the HTML itself
             $(".temp").text(response.main.temp);
             $(".city").text(response.name);
-            // Hint: To convert from Kelvin to Fahrenheit: F = (K - 273.15) * 1.80 + 32
+            
+            // console logging the change in temperature displayed on the html from kelvin to farenheit using conversion expression
             console.log((response.main.temp - 273.15) * 1.80 + 32);
 
-            // Create CODE HERE to dump the temperature content into HTML
+            // code to dump the content into the HTML
             $(".temp").text((response.main.temp - 273.15) * 1.80 + 32);
             $(".humidity").text(response.main.humidity);
 
