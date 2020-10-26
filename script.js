@@ -33,13 +33,29 @@ $(document).ready(function () {
             console.log((response.main.temp - 273.15) * 1.80 + 32);
 
             // code to dump the content into the HTML
-            $(".temp").text((response.main.temp - 273.15) * 1.80 + 32);
-            $(".humidity").text(response.main.humidity);
-            $(".wind").text(response.wind.speed);
+            $(".temp").text("Temperature: " + (response.main.temp - 273.15) * 1.80 + 32);
+            $(".humidity").text("Humidity: " + response.main.humidity + " %");
+            $(".wind").text("Wind Speed: " + response.wind.speed + " mph");
 
         });
 
-        
+        //creating separate ajax call for UV index within search onclick
+        var lat = JSON.stringify(response.city.coord.lat);
+        var long = JSON.stringify(response.city.coord.lon);
+        var UVqueryURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + long + "&appid=" + APIkey;
+
+        $.ajax({
+            url: UVqueryURL,
+            method: "GET"
+        }).then(function(response){
+            console.log(response);
+            var uvIndex = response.value;
+            $(".uv").text(uvIndex);
+        }); // keeps coming back as "response is not defined" not sure why?
+
+
+
+
     });
 
     // function for getting current weather
