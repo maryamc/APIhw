@@ -1,9 +1,9 @@
-// http://api.openweathermap.org/data/2.5/weather?q=boston&appid=82cd4c13edf633371f0dc74a457a8087
-//document.ready is telling the server to load html first then css then js
 $(document).ready(function () {
     // This is our API key. Add your own API key between the ""
     // var APIKey = "82cd4c13edf633371f0dc74a457a8087";
 
+    //saving to local storage for city list
+    
 
 
     // adding click event for the search button giving us the current weather
@@ -26,7 +26,7 @@ $(document).ready(function () {
             console.log(queryURL);
             console.log(response);
             console.log(response.main.temp);
-          // this code will transfer the contents to the HTML itself
+            // this code will transfer the contents to the HTML itself
             $(".temp").text(response.main.temp);
             $(".city").text(response.name);
             // console logging the change in temperature displayed on the html from kelvin to farenheit using conversion expression
@@ -47,29 +47,37 @@ $(document).ready(function () {
         $.ajax({
             url: UVqueryURL,
             method: "GET"
-        }).then(function(response){
+        }).then(function (response) {
             console.log(response);
             var uvIndex = response.value;
             $(".uv").text(uvIndex);
-        }); // keeps coming back as "response is not defined" not sure why?
+        }); // keeps coming back as "response is not defined" not sure why? doesnt seem to be any syntax issues, there must be something wrong with longitude and latitude variables?
 
-
+        // currentWeather();
+        prevSearch();
 
 
     });
 
+    //function for turning search input into list
+    function prevSearch(){
+        var searchList = $("<li>").addClass("list-group").text(city);
+        $("#cityList").prepend(searchList);
+    }
+
+
     // function for getting current weather
-    function currentWeather () {
+    function currentWeather() {
         var forecastQueryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIkey;
 
         // ajax call for current weather
         $.ajax({
             url: forecastQueryURL,
             method: "GET"
-        }).then(function(response) {
+        }).then(function (response) {
             console.log(response);
         })
-    }
+    };
 
 
 

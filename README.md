@@ -14,6 +14,6 @@ The function of this application is to provide the user with information about t
     - wind speed
     - UV index (for those hot summer days so you can put on some sunscreen!)
 
-Upon searching, the information will be stored in local storage and then displayed on the screen under the search bar. Searched items will prepend onto a list and any of them can be click, and the information will be retrieved. 
+Upon searching, the information will be stored in local storage and then displayed on the screen under the search bar. Searched items will prepend onto a list and any of them can be click, and the information will be retrieved.  
 
 
