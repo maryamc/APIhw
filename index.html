@@ -20,18 +20,47 @@
     </br>
     <!-- Search form -->
     <div class="container">
-        <form>
-            <div class="form-row">
-              <div class="col">
-                <input type="text" class="form-control" id="city-input" placeholder="Search for a city">
-                <button class="btn btn-primary" id="searchBtn"> Search </button>
-              </div>
-            </div>
+        <div class="row">
+
+            <form>
+                <div class="form-row">
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" id="city-input" placeholder="Search for a city">
+                    </div>
+                    <button class="btn btn-primary" id="searchBtn"> Search </button>
+                </div>
             </form>
-<p class="city"></p>
-        <p class="temp"></p>
+
+
+            <div class="container">
+
+                <div class="col-md-8">
+                    <div class="card" id="currentWeather">
+                        <p class="city"></p>
+                        <p class="temp"></p>
+                        <p class="humidity"></p>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+    </div>
+
     </div>
     </br>
+    <!-- <div class="container">
+        
+            <div class="col-md-8">
+                <div class="card" id="currentWeather"></div>
+            </div>
+
+        
+    </div> -->
 
     <div class="container">
         <ul class="list-group">
@@ -43,15 +72,15 @@
         </ul>
     </div>
 
- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 
 
 
 
 
-   
+
+
     <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>

@@ -11,7 +11,7 @@ $(document).ready(function () {
     // var queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
 
 
-    // adding click event for the search button
+    // adding click event for the search button giving us the current weather
     $("#searchBtn").on("click", function (event) {
 
         // event.preventDefault(); prevents the page from  refreashing when the search button is clicked and it instead actually submits the data from the search button to run through the weather server
@@ -23,21 +23,19 @@ $(document).ready(function () {
         var APIKey = "82cd4c13edf633371f0dc74a457a8087";
         var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
 
-        // creating the ajax call that will run the function
+        // creating the ajax call that will run the function and console logging the responses
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-            // console logging the code to log the queryURL
             console.log(queryURL);
-            // console logging code to log the response function
             console.log(response);
-            // console logging code to show temperature 
             console.log(response.main.temp);
 
-            // this code will transfer the contents to the HTML itself
+          // this code will transfer the contents to the HTML itself
             $(".temp").text(response.main.temp);
             $(".city").text(response.name);
+
             
             // console logging the change in temperature displayed on the html from kelvin to farenheit using conversion expression
             console.log((response.main.temp - 273.15) * 1.80 + 32);
