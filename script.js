@@ -2,9 +2,6 @@ $(document).ready(function () {
     // This is our API key. Add your own API key between the ""
     // var APIKey = "82cd4c13edf633371f0dc74a457a8087";
 
-    //saving to local storage for city list
-    
-
 
     // adding click event for the search button giving us the current weather
     $("#searchBtn").on("click", function (event) {
@@ -40,8 +37,8 @@ $(document).ready(function () {
         });
 
         //creating separate ajax call for UV index within search onclick
-        var lat = JSON.stringify(response.city.coord.lat);
-        var long = JSON.stringify(response.city.coord.lon);
+        var lat = JSON.stringify(response.coord.lat);
+        var long = JSON.stringify(response.coord.lon);
         var UVqueryURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + long + "&appid=" + APIkey;
 
         $.ajax({
@@ -53,17 +50,29 @@ $(document).ready(function () {
             $(".uv").text(uvIndex);
         }); // keeps coming back as "response is not defined" not sure why? doesnt seem to be any syntax issues, there must be something wrong with longitude and latitude variables?
 
-        // currentWeather();
-        prevSearch();
+        currentWeather();
+        renderButtons();
 
 
     });
 
-    //function for turning search input into list
-    function prevSearch(){
-        var searchList = $("<li>").addClass("list-group").text(city);
-        $("#cityList").prepend(searchList);
-    }
+    var cityNames = [];
+
+    // Function for displaying city data
+    function renderButtons() {
+
+      // Delete the content inside the buttons-view div prior to adding new movies
+      // (this is necessary otherwise you will have repeat buttons)
+      $("#cityList").empty();
+
+      // Loop through the array of movies, then generate buttons for each movie in the array
+      for( var i =0; i < cityNames.length; i++){
+        var button = $ ("<button>");
+        button.text(cityNames[i]);
+        $("#cityList").append(button);
+
+      };
+    };
 
 
     // function for getting current weather
@@ -76,6 +85,8 @@ $(document).ready(function () {
             method: "GET"
         }).then(function (response) {
             console.log(response);
+            $(".temp").text(response.dt.temp);
+            $(".city").text(response.dt.humidity);
         })
     };
 
