@@ -1,14 +1,9 @@
 // http://api.openweathermap.org/data/2.5/weather?q=boston&appid=82cd4c13edf633371f0dc74a457a8087
-
 //document.ready is telling the server to load html first then css then js
 $(document).ready(function () {
     // This is our API key. Add your own API key between the ""
     // var APIKey = "82cd4c13edf633371f0dc74a457a8087";
 
-    // Here we are building the URL we need to query the database
-    // var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
-    // var queryURL ="https://api.openweathermap.org/?t=" + city + "&apikey=trilogy";
-    // var queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
 
 
     // adding click event for the search button giving us the current weather
@@ -31,21 +26,39 @@ $(document).ready(function () {
             console.log(queryURL);
             console.log(response);
             console.log(response.main.temp);
-
           // this code will transfer the contents to the HTML itself
             $(".temp").text(response.main.temp);
             $(".city").text(response.name);
-
-            
             // console logging the change in temperature displayed on the html from kelvin to farenheit using conversion expression
             console.log((response.main.temp - 273.15) * 1.80 + 32);
 
             // code to dump the content into the HTML
             $(".temp").text((response.main.temp - 273.15) * 1.80 + 32);
             $(".humidity").text(response.main.humidity);
+            $(".wind").text(response.wind.speed);
 
         });
+
+        
     });
+
+    // function for getting current weather
+    function currentWeather () {
+        var forecastQueryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIkey;
+
+        // ajax call for current weather
+        $.ajax({
+            url: forecastQueryURL,
+            method: "GET"
+        }).then(function(response) {
+            console.log(response);
+        })
+    }
+
+
+
+
+
 });
 
 
