@@ -1,0 +1,9 @@
+h1{
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+
+#heading{
+background-color: rgb(54, 119, 240);
+}
