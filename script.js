@@ -64,21 +64,20 @@ $(document).ready(function () {
   
     function getForecast(searchValue) {
         var APIKEY = "82cd4c13edf633371f0dc74a457a8087"
-       // https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
 
       $.ajax({
         type: "GET",
-        url: "https://api.openweathermap.org/data/2.5/weather?q=" + searchValue + "&appid=" + APIKEY,
+        url: "https://api.openweathermap.org/data/2.5/forecast?q=" + searchValue + "&appid=" + APIKEY,
         dataType: "json",
         success: function (data) {
           // overwrite any existing content with title and empty row
           $("#forecast").html("<h4 class=\"mt-3\">5-Day Forecast:</h4>").append("<div class=\"row\">");
-  var data = [];
+  
           // loop over all forecasts (by 3-hour increments)
-          for (var i = 0; i < data.length; i++) {
-              console.log(data.list.length);
+          for (var i = 0; i < data.list.length; i++) {
+              
             // only look at forecasts around 3:00pm
-            if (data.list[i].dt_txt.indexOf("15:00:00") !== -1) {
+            if (data.list[i].dt_txt.indexOf("00:00:00") !== -1) {
               // create html elements for a bootstrap card
               var col = $("<div>").addClass("col-md-2");
               var card = $("<div>").addClass("card bg-primary text-white");
@@ -110,7 +109,7 @@ $(document).ready(function () {
         dataType: "json",
         success: function (data) {
           var uv = $("<p>").text("UV Index: ");
-          var btn = $("<span>").addClass("btn btn-sm").text(data.value);
+          var btn = $("<span>").addClass("btn").text(data.value);
   
           // change color depending on uv value
           if (data.value < 3) {
