@@ -6,6 +6,8 @@ $(document).ready(function () {
       $("#search-value").val("");
   
       searchWeather(searchValue);
+      getForecast(searchValue);
+      getUVIndex(searchValue);
     });
   
     $(".history").on("click", "li", function () {
@@ -62,6 +64,7 @@ $(document).ready(function () {
   
     function getForecast(searchValue) {
         var APIKEY = "82cd4c13edf633371f0dc74a457a8087"
+       // https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
 
       $.ajax({
         type: "GET",
@@ -70,9 +73,10 @@ $(document).ready(function () {
         success: function (data) {
           // overwrite any existing content with title and empty row
           $("#forecast").html("<h4 class=\"mt-3\">5-Day Forecast:</h4>").append("<div class=\"row\">");
-  
+  var data = [];
           // loop over all forecasts (by 3-hour increments)
-          for (var i = 0; i < data.list.length; i++) {
+          for (var i = 0; i < data.length; i++) {
+              console.log(data.list.length);
             // only look at forecasts around 3:00pm
             if (data.list[i].dt_txt.indexOf("15:00:00") !== -1) {
               // create html elements for a bootstrap card
@@ -98,11 +102,11 @@ $(document).ready(function () {
   
     function getUVIndex(lat, lon) {
         var APIKEY = "82cd4c13edf633371f0dc74a457a8087"
-        
+
       $.ajax({
 
         type: "GET",
-        url: "https://api.openweathermap.org/data/2.5/weather?q=" + searchValue + "&appid=" + APIKEY + lat + "&lon=" + lon,
+        url: "https://api.openweathermap.org/data/2.5/weather?q=" +"&appid=" + APIKEY + "&lat=" +lat + "&lon=" + lon,
         dataType: "json",
         success: function (data) {
           var uv = $("<p>").text("UV Index: ");
